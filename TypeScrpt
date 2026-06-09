@@ -1,1 +1,41 @@
+//parallel is was faster
 
+// Slow method (sequential 900ms)
+async function fetchSequential(): Promise<void> {
+  const urls = [
+    "https://jsonplaceholder.typicode.com/users/1",
+    "https://jsonplaceholder.typicode.com/users/2",
+    "https://jsonplaceholder.typicode.com/users/3",
+  ];
+ 
+  console.time("sequential");
+ 
+  for (const url of urls) {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(`Fetched user ${data.id}: ${data.name}`);
+  }
+ 
+  console.timeEnd("sequential");
+}
+ 
+fetchSequential();
+
+// Fast method (parallel 300ms)
+
+async function fetchParallel(): Promise<void> {
+  const urls = [
+    "https://jsonplaceholder.typicode.com/users/1",
+    "https://jsonplaceholder.typicode.com/users/2",
+    "https://jsonplaceholder.typicode.com/users/3",
+  ];
+
+  console.time("parallel");
+
+  const results = await Promise.all(urls.map((url) => fetch(url).then((r) => r.json())));
+  results.forEach((data) => console.log(`Fetched user ${data.id}: ${data.name}`));
+
+  console.timeEnd("parallel");
+}
+
+fetchParallel();
