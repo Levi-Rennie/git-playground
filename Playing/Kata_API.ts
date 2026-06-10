@@ -18,9 +18,7 @@ const render = (result: ApiResult): string => {
     return "Loading...";
   }
 
-  if (result.status === "error") {
-    return result.message;
-  }
+    // deleted the error branch
 
   return `Users: ${result.data.map(u => u.name).join(", ")}`;
 };
