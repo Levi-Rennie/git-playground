@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "kata1": "tsx Playing/Kata_1.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}
